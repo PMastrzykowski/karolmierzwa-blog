@@ -67,15 +67,15 @@ class CommentsSection extends React.Component {
                 </div>
                 <div className='toggable-wrapper' style={this.state.isEditorOpen? {height: '440px', opacity: 1} : {height: 0, opacity: 0}}>
                     <form>
-                        <div className="floating-label-wrap">
+                        <div className={`floating-label-wrap ${this.state.name === '' && this.state.showErrors ? 'error' : ''}`}>
                             <input type="text" onChange={this.handleChange} value={this.state.name} name='name' className="floating-label-field floating-label-field--s3" id="field-1" placeholder=" " ref={(div) => this.name = div}/>
                             <label htmlFor="field-1" className="floating-label">Imię</label>
                         </div>
-                        <div className="floating-label-wrap">
+                        <div className={`floating-label-wrap ${this.state.email === '' && this.state.showErrors ? 'error' : ''}`}>
                             <input type="email" onChange={this.handleChange} value={this.state.email} name='email' className="floating-label-field floating-label-field--s3" id="field-2" placeholder=" " />
                             <label htmlFor="field-2" className="floating-label">Email</label>
                         </div>
-                        <div className="floating-label-wrap">
+                        <div className={`floating-label-wrap ${this.state.body === '' && this.state.showErrors ? 'error' : ''}`}>
                             <textarea type="text" onChange={this.handleChange} value={this.state.body} name='body' className="floating-label-field floating-label-field--s3" id="field-3" placeholder=" " />
                             <label htmlFor="field-3" className="floating-label">Komentarz</label>
                         </div>

@@ -16,6 +16,14 @@
   display: flex;
   flex-flow: column-reverse;
   margin-bottom: 1em;
+  &.error{
+    input, textarea{
+      border-color: $color-7;
+    }
+    label{
+      color: $color-7;
+    }
+  }
 }
 /**
   * Add a transition to the label and input.
@@ -29,7 +37,6 @@ textarea {
   transition: all 0.2s;
   touch-action: manipulation;
 }
-
 input,
 textarea {
   font-size: 1.3em;
