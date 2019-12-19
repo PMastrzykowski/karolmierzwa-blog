@@ -11,7 +11,8 @@ class CommentsSection extends React.Component {
             email: '',
             body: '',
             comments: this.props.comments || [],
-            isEditorOpen: false
+            isEditorOpen: false,
+            showErrors: false
         }
     }
     openEditor = () => {
@@ -24,6 +25,12 @@ class CommentsSection extends React.Component {
     }
     submitComment = (e) => {
         e.preventDefault();
+        if(this.state.name === '' || this.state.email === '' || this.state.body === '' ){
+            this.setState({
+                showErrors: true
+            })
+            return;
+        }
         let data = {
             name: this.state.name,
             email: this.state.email,
@@ -58,7 +65,7 @@ class CommentsSection extends React.Component {
                 <div className='toggable-wrapper' style={this.state.isEditorOpen? {height: 0, opacity: 0} : {height: '58px', opacity: 1}}>
                     <div className='new-comment-button'>Napisz komentarz...</div>
                 </div>
-                <div className='toggable-wrapper' style={this.state.isEditorOpen? {height: '415px', opacity: 1} : {height: 0, opacity: 0}}>
+                <div className='toggable-wrapper' style={this.state.isEditorOpen? {height: '440px', opacity: 1} : {height: 0, opacity: 0}}>
                     <form>
                         <div className="floating-label-wrap">
                             <input type="text" onChange={this.handleChange} value={this.state.name} name='name' className="floating-label-field floating-label-field--s3" id="field-1" placeholder=" " ref={(div) => this.name = div}/>
