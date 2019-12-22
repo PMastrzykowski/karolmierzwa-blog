@@ -11,7 +11,7 @@ class Img extends React.Component {
     }
     render = () => {
         return (<div className={'image-component ' + this.state.class}>
-            <img src={'https://karolmierzwa-blog-cms.herokuapp.com' + this.state.src} alt=''/>
+            <img src={this.state.src} alt=''/>
         </div>)
     }
 }
