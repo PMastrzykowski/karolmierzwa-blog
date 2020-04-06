@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import strapi from '../strapi';
 import InfiniteScroll from 'react-infinite-scroller';
 import { formatDate } from '../helpers';
-import Img from './img';
 import Loader from './loader';
 
 class Main extends React.Component {
@@ -15,7 +14,7 @@ class Main extends React.Component {
             limit: 4
         }
     }
-    componentDidMount = async() => {
+    componentDidMount = async () => {
         try {
             const blogposts_count = await strapi.getEntryCount('blogposts')
             const blogposts = await strapi.getEntries('blogposts', {
@@ -25,23 +24,21 @@ class Main extends React.Component {
             this.setState({ blogposts, blogposts_count });
         }
         catch (err) {
-            alert(err);
         }
     }
-    fetchPosts = async() => {
+    fetchPosts = async () => {
         try {
-            const blogposts = await strapi.getEntries('blogposts', 
-            {
-                '_limit': this.state.limit, 
-                '_start': this.state.blogposts.length,
-                '_sort': 'date:DESC'
-            })
+            const blogposts = await strapi.getEntries('blogposts',
+                {
+                    '_limit': this.state.limit,
+                    '_start': this.state.blogposts.length,
+                    '_sort': 'date:DESC'
+                })
             let state_posts = this.state.blogposts;
             let new_posts = state_posts.concat(blogposts);
-            this.setState({ blogposts: new_posts});
+            this.setState({ blogposts: new_posts });
         }
         catch (err) {
-            alert(err);
         }
     }
     render = () => {
@@ -53,9 +50,11 @@ class Main extends React.Component {
                 loader={<Loader />}
             >
                 {this.state.blogposts.map((blogpost, index) => (
-                    <Link key={blogpost.id} to={`/${blogpost.id}`}>
+                    <Link key={blogpost.id} to={`/${blogpost.url}`}>
                         <div className={`blog-post ${index === 0 && 'new'}`}>
-                            <Img class='blog-post-image' src={blogpost.image.url}/>
+                            <div className={'image-component blog-post-image'}>
+                                <div style={{backgroundImage: `url(${blogpost.image.url})`}} className={`blog-post-image-inner`} />
+                            </div>
                             <div className='info-wrapper'>
                                 <div className='category'>{blogpost.category}, <strong>{formatDate(blogpost.date)}</strong></div>
                                 <div className='title'>{blogpost.title}</div>

@@ -16,7 +16,6 @@ class About extends React.Component {
             this.setState({ data: data[0] });
         }
         catch (err) {
-            alert(err);
         }
     }
     render = () => {

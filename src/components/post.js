@@ -15,11 +15,14 @@ class Post extends React.Component {
     }
     async componentDidMount() {
         try {
-            const data = await strapi.getEntry('blogposts', this.props.match.params.id);
-            this.setState({ data });
+            const data = await strapi.getEntries('blogposts', { url: this.props.match.params.id });
+            if (data.length > 0) {
+                this.setState({ data: data[0] });
+            } else {
+                this.props.history.push("/")
+            }
         }
         catch (err) {
-            alert(err);
         }
     }
     render = () => {

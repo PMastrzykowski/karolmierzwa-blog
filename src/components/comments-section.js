@@ -52,7 +52,6 @@ class CommentsSection extends React.Component {
             await strapi.updateEntry('blogposts', this.props.id, {comments: this.state.comments})
         }
         catch (err) {
-            alert(err);
         }
     }
     render = () => {
