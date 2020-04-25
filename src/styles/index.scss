@@ -264,6 +264,9 @@ body,
         letter-spacing: -0.004em;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
+        img{
+          width: 100%;
+        }
       }
     }
   }
